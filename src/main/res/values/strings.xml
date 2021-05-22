@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Anagrama</string>
+    <string name="resultado_placeholder">Parabéns! Você acertou!</string>
+    <string name="palavra_placeholder">BACAAET</string>
+    <string name="digite_seu_palpite">digite seu palpite</string>
+    <string name="enviar">enviar</string>
+    <string name="instrucao">Você consegue desembaralhar essa palavra?</string>
+</resources>
