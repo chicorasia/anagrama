@@ -8,7 +8,7 @@
     tools:context=".ui.main.MainFragment">
 
     <TextView
-        android:id="@+id/palavraTv"
+        android:id="@+id/desafioTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/palavra_placeholder"
@@ -24,7 +24,7 @@
         android:id="@+id/bannerInstrucao"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="24dp"
+        android:layout_margin="@dimen/margem_padrao"
         android:text="@string/instrucao"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,7 +46,7 @@
         app:layout_constraintGuide_percent="0.42" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/palpiteEdt"
+        android:id="@+id/palpite"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margem_padrao"
@@ -56,6 +56,7 @@
         >
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/palpiteInputEdt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/digite_seu_palpite"
@@ -66,7 +67,7 @@
         android:id="@+id/enviarBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/palpiteEdt"
+        app:layout_constraintTop_toBottomOf="@id/palpite"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -84,10 +85,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enviarBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/enviarBtn"
+        style="?attr/textAppearanceBody1"/>
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/escoreTv"
         style="?attr/textAppearanceBody1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

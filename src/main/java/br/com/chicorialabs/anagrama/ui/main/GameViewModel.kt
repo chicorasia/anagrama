@@ -3,6 +3,10 @@ package br.com.chicorialabs.anagrama.ui.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import java.util.*
+import kotlin.random.Random
+import kotlin.random.nextInt
+
 
 class GameViewModel : ViewModel() {
 
@@ -10,24 +14,70 @@ class GameViewModel : ViewModel() {
     val segredo: LiveData<String>
         get() = _segredo
 
+    private val _desafio = MutableLiveData<String>()
+    val desafio: LiveData<String>
+        get() = _desafio
+
     private val _score = MutableLiveData<Int>()
     val score: LiveData<Int>
         get() = _score
 
-    fun embaralhaPalavra(palavra: String) : String {
-        return ""
+    private val _round = MutableLiveData<Int>()
+    val round: LiveData<Int>
+        get() = _round
+
+    val acerto = MutableLiveData<Boolean>(false)
+
+    init {
+        _score.value = 0
+        _round.value = 0
+    }
+
+    fun criaSegredo() {
+        val palavraSecreta = sorteiaPalavra(listaDePalavras)
+        _segredo.value = palavraSecreta
+        embaralhaPalavra(palavraSecreta)
+    }
+
+    fun embaralhaPalavra(palavra: String) {
+        val letras = arrayListOf<Char>()
+        palavra.forEach {
+            letras.add(it)
+        }
+        letras.shuffle()
+        var palavraEmbaralhada: String = ""
+        for (l in letras) {
+            palavraEmbaralhada += l
+        }
+        _desafio.value = palavraEmbaralhada.toUpperCase()
+
     }
 
     fun sorteiaPalavra(lista: List<String>) : String {
-        return ""
-    }
-
-    fun verifica() : Boolean {
-        return false
+        val idx = Random.nextInt(lista.indices)
+        return lista[idx]
     }
 
     fun enviar(palpite: String) {
+        if (palpite.equals(segredo.value, ignoreCase = true)){
+            acerto.value = true
+            var scoreAtual: Int = score.value ?: 0
+            scoreAtual++
+            _score.value = scoreAtual
+        } else {
+            acerto.value = false
+        }
+    }
 
+    fun avancaRound(){
+        var round = _round.value ?: 0
+        round++
+        _round.value = round
+    }
+
+    fun novoJogo() {
+        _round.value = 0
+        _score.value = 0
     }
 
 
