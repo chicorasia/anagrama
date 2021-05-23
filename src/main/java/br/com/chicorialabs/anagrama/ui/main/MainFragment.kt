@@ -1,15 +1,16 @@
 package br.com.chicorialabs.anagrama.ui.main
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import br.com.chicorialabs.anagrama.R
 import com.google.android.material.button.MaterialButton
 
@@ -39,12 +40,14 @@ class MainFragment : Fragment() {
         resultadoTv = view.findViewById(R.id.resultadoTv)
         escoreTv = view.findViewById(R.id.escoreTv)
 
+        mGameViewModel = ViewModelProvider(this).get(GameViewModel::class.java)
+
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mGameViewModel = ViewModelProvider(this).get(GameViewModel::class.java)
+
 
         mGameViewModel.criaSegredo()
 
@@ -53,16 +56,15 @@ class MainFragment : Fragment() {
 
         }
 
+
         enviarBtn.setOnClickListener {
-            if (mGameViewModel.round.value == 10){
+            if (mGameViewModel.round.value == 10) {
                 Toast.makeText(activity, "Jogo encerrado!", Toast.LENGTH_LONG).show()
                 enviarBtn.text = getText(R.string.fim_de_jogo)
-                it.setOnClickListener {
-                    // TODO: Navegar para o GameOverFragment e encerrar esse fragmento
-                    mostraToast("Fim de jogo")
-                }
+                // TODO: Navegar para o GameOverFragment e encerrar esse fragmento
+                jogoEncerrado()
             }
-            if(mGameViewModel.round.value!! <= 9) {
+            if (mGameViewModel.round.value!! <= 9) {
                 val palpite = palpiteInputEdt.text.toString().toUpperCase()
                 mGameViewModel.enviar(palpite)
                 mGameViewModel.avancaRound()
@@ -83,10 +85,15 @@ class MainFragment : Fragment() {
                 false -> {
                     mostraToast("Lamento, você errou! A palavra era: ${mGameViewModel.segredo.value}")
                 }
-                null -> { }
+                null -> {
+                }
             }
         })
 
+    }
+
+    private fun jogoEncerrado() {
+        findNavController().navigate(R.id.action_mainFragment_to_gameOverFragment)
     }
 
     fun mostraToast(mensagem: String) {
