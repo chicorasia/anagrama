@@ -65,7 +65,8 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/enviarBtn"
-        android:layout_width="wrap_content"
+        android:layout_margin="@dimen/margem_padrao"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/palpite"
         app:layout_constraintStart_toStartOf="parent"

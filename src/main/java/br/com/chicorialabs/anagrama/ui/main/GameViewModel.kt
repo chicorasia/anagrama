@@ -26,11 +26,11 @@ class GameViewModel : ViewModel() {
     val round: LiveData<Int>
         get() = _round
 
-    val acerto = MutableLiveData<Boolean>(false)
+    val acerto = MutableLiveData<Boolean?>(null)
 
     init {
         _score.value = 0
-        _round.value = 0
+        _round.value = 1
     }
 
     fun criaSegredo() {
@@ -76,7 +76,7 @@ class GameViewModel : ViewModel() {
     }
 
     fun novoJogo() {
-        _round.value = 0
+        _round.value = 1
         _score.value = 0
     }
 

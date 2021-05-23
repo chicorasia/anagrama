@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import br.com.chicorialabs.anagrama.R
 import com.google.android.material.button.MaterialButton
@@ -53,42 +54,43 @@ class MainFragment : Fragment() {
         }
 
         enviarBtn.setOnClickListener {
-            val palpite = palpiteInputEdt.text.toString().toUpperCase()
-            mGameViewModel.enviar(palpite)
-            mGameViewModel.avancaRound()
-            mGameViewModel.criaSegredo()
             if (mGameViewModel.round.value == 10){
-               mGameViewModel.novoJogo()
-               mGameViewModel.criaSegredo()
+                Toast.makeText(activity, "Jogo encerrado!", Toast.LENGTH_LONG).show()
+                enviarBtn.text = getText(R.string.fim_de_jogo)
+                it.setOnClickListener {
+                    // TODO: Navegar para o GameOverFragment e encerrar esse fragmento
+                    mostraToast("Fim de jogo")
+                }
             }
+            if(mGameViewModel.round.value!! <= 9) {
+                val palpite = palpiteInputEdt.text.toString().toUpperCase()
+                mGameViewModel.enviar(palpite)
+                mGameViewModel.avancaRound()
+                mGameViewModel.criaSegredo()
+            }
+
         }
 
         mGameViewModel.score.observe(viewLifecycleOwner) {
             escoreTv.text = it.toString()
         }
 
-        mGameViewModel.round.observe(viewLifecycleOwner) {
-            if (it == 10) {
-                resultadoTv.text = "Fim de jogo!"
-            }
-        }
-
-        mGameViewModel.acerto.observe(viewLifecycleOwner, Observer<Boolean> { ehAcerto ->
+        mGameViewModel.acerto.observe(viewLifecycleOwner, Observer<Boolean?> { ehAcerto ->
             when (ehAcerto) {
                 true -> {
-                    resultadoTv.text = "Parabéns, você acertou!"
-                    resultadoTv.visibility = View.VISIBLE
+                    mostraToast("Parabéns, você acertou!")
                 }
                 false -> {
-                    resultadoTv.text = "Lamento, você errou!"
-                    resultadoTv.visibility = View.VISIBLE
+                    mostraToast("Lamento, você errou! A palavra era: ${mGameViewModel.segredo.value}")
                 }
-                null -> {
-                    resultadoTv.visibility = View.INVISIBLE
-                }
+                null -> { }
             }
         })
 
+    }
+
+    fun mostraToast(mensagem: String) {
+        Toast.makeText(activity, mensagem, Toast.LENGTH_LONG).show()
     }
 
 }
