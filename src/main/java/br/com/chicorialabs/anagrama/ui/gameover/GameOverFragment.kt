@@ -16,6 +16,7 @@ class GameOverFragment : Fragment() {
         fun newInstance() = GameOverFragment()
     }
 
+//    TODO 005: Criar um atributo NavArgs<*> no fragmento de destino
     private lateinit var novoJogoBtn: MaterialButton
 
     private lateinit var viewModel: GameOverViewModel
@@ -34,6 +35,8 @@ class GameOverFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+//        TODO 006: Recuperar a informação recebida e inicializar os dados no GameOverViewModel
 
         novoJogoBtn.setOnClickListener {
             findNavController().navigate(R.id.action_gameOverFragment_to_mainFragment)

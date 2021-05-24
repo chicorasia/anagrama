@@ -8,7 +8,7 @@ import kotlin.random.Random
 import kotlin.random.nextInt
 
 
-class GameViewModel : ViewModel() {
+class MainViewModel : ViewModel() {
 
     private val _segredo = MutableLiveData<String>()
     val segredo: LiveData<String>

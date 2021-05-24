@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+//    TODO 002: Adicionar plugin safeargs no build.gradle do app
 }
 
 android {

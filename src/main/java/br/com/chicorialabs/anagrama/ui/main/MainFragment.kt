@@ -14,13 +14,14 @@ import androidx.navigation.fragment.findNavController
 import br.com.chicorialabs.anagrama.R
 import com.google.android.material.button.MaterialButton
 
+//TODO 003: Adicionar um argumento ao GameOverFragment no mobile_navigation.xml
 class MainFragment : Fragment() {
 
     companion object {
         fun newInstance() = MainFragment()
     }
 
-    private lateinit var mGameViewModel: GameViewModel
+    private lateinit var mMainViewModel: MainViewModel
     private lateinit var desafioTv: TextView
     private lateinit var palpiteInputEdt: EditText
     private lateinit var enviarBtn: MaterialButton
@@ -40,7 +41,7 @@ class MainFragment : Fragment() {
         resultadoTv = view.findViewById(R.id.resultadoTv)
         escoreTv = view.findViewById(R.id.escoreTv)
 
-        mGameViewModel = ViewModelProvider(this).get(GameViewModel::class.java)
+        mMainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         return view
     }
@@ -49,41 +50,40 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        mGameViewModel.criaSegredo()
+        mMainViewModel.criaSegredo()
 
-        mGameViewModel.desafio.observe(viewLifecycleOwner) { desafio ->
+        mMainViewModel.desafio.observe(viewLifecycleOwner) { desafio ->
             desafioTv.setText(desafio)
 
         }
 
 
         enviarBtn.setOnClickListener {
-            if (mGameViewModel.round.value == 10) {
+            if (mMainViewModel.round.value == 10) {
                 Toast.makeText(activity, "Jogo encerrado!", Toast.LENGTH_LONG).show()
                 enviarBtn.text = getText(R.string.fim_de_jogo)
-                // TODO: Navegar para o GameOverFragment e encerrar esse fragmento
                 jogoEncerrado()
             }
-            if (mGameViewModel.round.value!! <= 9) {
+            if (mMainViewModel.round.value!! <= 9) {
                 val palpite = palpiteInputEdt.text.toString().toUpperCase()
-                mGameViewModel.enviar(palpite)
-                mGameViewModel.avancaRound()
-                mGameViewModel.criaSegredo()
+                mMainViewModel.enviar(palpite)
+                mMainViewModel.avancaRound()
+                mMainViewModel.criaSegredo()
             }
 
         }
 
-        mGameViewModel.score.observe(viewLifecycleOwner) {
+        mMainViewModel.score.observe(viewLifecycleOwner) {
             escoreTv.text = it.toString()
         }
 
-        mGameViewModel.acerto.observe(viewLifecycleOwner, Observer<Boolean?> { ehAcerto ->
+        mMainViewModel.acerto.observe(viewLifecycleOwner, Observer<Boolean?> { ehAcerto ->
             when (ehAcerto) {
                 true -> {
                     mostraToast("Parabéns, você acertou!")
                 }
                 false -> {
-                    mostraToast("Lamento, você errou! A palavra era: ${mGameViewModel.segredo.value}")
+                    mostraToast("Lamento, você errou! A palavra era: ${mMainViewModel.segredo.value}")
                 }
                 null -> {
                 }
@@ -93,6 +93,7 @@ class MainFragment : Fragment() {
     }
 
     private fun jogoEncerrado() {
+//        TODO 004: Reescrever o método `jogoEncerrado()` para passar a pontuação
         findNavController().navigate(R.id.action_mainFragment_to_gameOverFragment)
     }
 
