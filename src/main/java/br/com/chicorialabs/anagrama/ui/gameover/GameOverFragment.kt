@@ -43,19 +43,15 @@ class GameOverFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         novoJogoBtn.setOnClickListener {
             findNavController().navigate(R.id.action_gameOverFragment_to_mainFragment)
         }
 
-//        mGameOverViewModel.setScore(argumentos.escore)
-//
-//        mGameOverViewModel.score.observe(viewLifecycleOwner) {
-//            gameOverScore.text = it.toString()
-//        }
+        mGameOverViewModel.setScore(argumentos.escore)
 
-        gameOverScore.text = argumentos.escore.toString()
-
+        mGameOverViewModel.score.observe(viewLifecycleOwner) {
+            gameOverScore.text = it.toString()
+        }
     }
 
 }
