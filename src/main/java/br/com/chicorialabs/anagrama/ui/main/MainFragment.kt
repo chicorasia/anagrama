@@ -93,7 +93,10 @@ class MainFragment : Fragment() {
     }
 
     private fun jogoEncerrado() {
-        findNavController().navigate(R.id.action_mainFragment_to_gameOverFragment)
+        val pontos: Int = mGameViewModel.score.value ?: 0
+        val action = MainFragmentDirections.actionMainFragmentToGameOverFragment()
+        action.escore = pontos
+        findNavController().navigate(action)
     }
 
     fun mostraToast(mensagem: String) {
