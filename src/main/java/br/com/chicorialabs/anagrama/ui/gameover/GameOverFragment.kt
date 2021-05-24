@@ -47,7 +47,9 @@ class GameOverFragment : Fragment() {
             findNavController().navigate(R.id.action_gameOverFragment_to_mainFragment)
         }
 
-        mGameOverViewModel.setScore(argumentos.escore)
+
+        val pontuacaoFinal = argumentos.pontuacaoFinal
+        mGameOverViewModel.setScore(pontuacaoFinal)
 
         mGameOverViewModel.score.observe(viewLifecycleOwner) {
             gameOverScore.text = it.toString()
