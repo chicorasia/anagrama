@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--TODO 002: envolver o ConstraintLayout com um campo <layout>-->
+<!--TODO 003: adicionar um campo <data> ao layout-->
+<!--TODO 004: adicionar uma <variable> que recebe o ViewModel-->
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,29 +11,30 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.MainFragment">
 
+    <!--    TODO 005: vincular o desafioTv ao MainViewModel.desafio.-->
     <TextView
         android:id="@+id/desafioTv"
+        style="?attr/textAppearanceHeadline4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/palavra_placeholder"
-        tools:text="BACAAET"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bannerInstrucao"
-        style="?attr/textAppearanceHeadline4"/>
+        tools:text="BACAAET" />
 
     <TextView
         android:id="@+id/bannerInstrucao"
+        style="?attr/textAppearanceHeadline5"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margem_padrao"
         android:text="@string/instrucao"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline2"
-        style="?attr/textAppearanceHeadline5"/>
+        app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
@@ -50,44 +55,42 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margem_padrao"
-        app:layout_constraintTop_toTopOf="@id/guideline3"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        >
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guideline3">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/palpiteInputEdt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/digite_seu_palpite"
-            />
+            android:hint="@string/digite_seu_palpite" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/enviarBtn"
-        android:layout_margin="@dimen/margem_padrao"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/palpite"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="@dimen/margem_padrao"
+        android:text="@string/enviar"
         android:textColor="@color/colorOnSecondary"
         app:backgroundTint="@color/secondaryColor"
-        android:text="@string/enviar"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/palpite" />
 
     <TextView
         android:id="@+id/resultadoTv"
+        style="?attr/textAppearanceBody1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/resultado_placeholder"
         android:visibility="invisible"
-        tools:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/enviarBtn"
-        style="?attr/textAppearanceBody1"/>
+        tools:visibility="visible" />
 
     <TextView
         android:id="@+id/escoreTv"
@@ -98,7 +101,9 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+

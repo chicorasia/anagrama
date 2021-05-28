@@ -19,7 +19,8 @@ class MainFragment : Fragment() {
     companion object {
         fun newInstance() = MainFragment()
     }
-
+//    TODO 006: inicializar o binding
+//    TODO 010: Eliminar referências ao desafioTv
     private lateinit var mMainViewModel: MainViewModel
     private lateinit var desafioTv: TextView
     private lateinit var palpiteInputEdt: EditText
@@ -32,15 +33,18 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+//        TODO 007: atribuir o binding.root à view
+//        TODO 008: atribuir o mMainViewModel ao binding.mainViewModel
+//        TODO 009: atribuir o lifeCycleOwner para tornar o LiveData observável
+        mMainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         val view = inflater.inflate(R.layout.main_fragment, container, false)
+
         desafioTv = view.findViewById(R.id.desafioTv)
         palpiteInputEdt = view.findViewById(R.id.palpiteInputEdt)
         enviarBtn = view.findViewById(R.id.enviarBtn)
         resultadoTv = view.findViewById(R.id.resultadoTv)
         escoreTv = view.findViewById(R.id.escoreTv)
-
-        mMainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         return view
     }
