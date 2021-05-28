@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import br.com.chicorialabs.anagrama.R
+import br.com.chicorialabs.anagrama.databinding.MainFragmentBinding
 import com.google.android.material.button.MaterialButton
 
 class MainFragment : Fragment() {
@@ -19,10 +20,12 @@ class MainFragment : Fragment() {
     companion object {
         fun newInstance() = MainFragment()
     }
-//    TODO 006: inicializar o binding
-//    TODO 010: Eliminar referências ao desafioTv
+
+    private val binding: MainFragmentBinding by lazy {
+        MainFragmentBinding.inflate(layoutInflater)
+    }
+
     private lateinit var mMainViewModel: MainViewModel
-    private lateinit var desafioTv: TextView
     private lateinit var palpiteInputEdt: EditText
     private lateinit var enviarBtn: MaterialButton
     private lateinit var resultadoTv: TextView
@@ -33,14 +36,13 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-//        TODO 007: atribuir o binding.root à view
-//        TODO 008: atribuir o mMainViewModel ao binding.mainViewModel
-//        TODO 009: atribuir o lifeCycleOwner para tornar o LiveData observável
+
         mMainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
-        val view = inflater.inflate(R.layout.main_fragment, container, false)
+        val view = binding.root
+        binding.mMainViewModel = mMainViewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
-        desafioTv = view.findViewById(R.id.desafioTv)
         palpiteInputEdt = view.findViewById(R.id.palpiteInputEdt)
         enviarBtn = view.findViewById(R.id.enviarBtn)
         resultadoTv = view.findViewById(R.id.resultadoTv)
@@ -54,11 +56,6 @@ class MainFragment : Fragment() {
 
 
         mMainViewModel.criaSegredo()
-
-        mMainViewModel.desafio.observe(viewLifecycleOwner) { desafio ->
-            desafioTv.setText(desafio)
-
-        }
 
 
         enviarBtn.setOnClickListener {
