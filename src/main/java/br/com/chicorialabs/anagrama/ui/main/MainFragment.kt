@@ -26,8 +26,6 @@ class MainFragment : Fragment() {
     }
 
     private lateinit var mMainViewModel: MainViewModel
-    private lateinit var palpiteInputEdt: EditText
-    private lateinit var enviarBtn: MaterialButton
     private lateinit var resultadoTv: TextView
 
     override fun onCreateView(
@@ -41,9 +39,6 @@ class MainFragment : Fragment() {
         binding.mainViewModel = mMainViewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-//        TODO 006: eliminar Edt e Btn
-        palpiteInputEdt = view.findViewById(R.id.palpiteInputEdt)
-        enviarBtn = view.findViewById(R.id.enviarBtn)
         resultadoTv = view.findViewById(R.id.resultadoTv)
 
         return view
@@ -54,21 +49,6 @@ class MainFragment : Fragment() {
 
 
         mMainViewModel.criaSegredo()
-
-
-// TODO 003: Mover esses comportamentos para para função enviaPalpite() do ViewModel
-        enviarBtn.setOnClickListener {
-            if (mMainViewModel.round.value == 10) {
-                mMainViewModel.jogoEncerrado()
-            }
-            if (mMainViewModel.round.value!! <= 9) {
-                val palpite = palpiteInputEdt.text.toString().toUpperCase()
-                mMainViewModel.enviar(palpite)
-                mMainViewModel.avancaRound()
-                mMainViewModel.criaSegredo()
-            }
-
-        }
 
         mMainViewModel.navegaParaGameOver.observe(viewLifecycleOwner) {
             it?.let{

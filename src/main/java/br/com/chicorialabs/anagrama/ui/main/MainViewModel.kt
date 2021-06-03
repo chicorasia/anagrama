@@ -31,8 +31,7 @@ class MainViewModel : ViewModel() {
     val navegaParaGameOver: LiveData<Boolean?>
         get() = _navegaParaGameOver
 
-//    TODO 001: adicionar uma variável palpite do tipo MutableLiveData<String> sem encapsulamento
-//    TODO 002: adicionar uma função enviaPalpite()
+    val palpite = MutableLiveData<String>()
 
     val acerto = MutableLiveData<Boolean?>(null)
 
@@ -66,7 +65,7 @@ class MainViewModel : ViewModel() {
         return lista[idx]
     }
 
-    fun enviar(palpite: String) {
+    fun testar(palpite: String) {
         if (palpite.equals(segredo.value, ignoreCase = true)){
             acerto.value = true
             var scoreAtual: Int = score.value ?: 0
@@ -89,6 +88,17 @@ class MainViewModel : ViewModel() {
 
     fun navegouParaGameOver(){
         _navegaParaGameOver.value = null
+    }
+
+    fun enviarPalpite(){
+        if (round.value == 10) {
+            jogoEncerrado()
+        }
+        if (round.value!! <= 9) {
+            testar(palpite.value.toString())
+            avancaRound()
+            criaSegredo()
+        }
     }
 
 
