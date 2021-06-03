@@ -41,6 +41,7 @@ class MainFragment : Fragment() {
         binding.mainViewModel = mMainViewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
+//        TODO 006: eliminar Edt e Btn
         palpiteInputEdt = view.findViewById(R.id.palpiteInputEdt)
         enviarBtn = view.findViewById(R.id.enviarBtn)
         resultadoTv = view.findViewById(R.id.resultadoTv)
@@ -58,8 +59,6 @@ class MainFragment : Fragment() {
 // TODO 003: Mover esses comportamentos para para função enviaPalpite() do ViewModel
         enviarBtn.setOnClickListener {
             if (mMainViewModel.round.value == 10) {
-                Toast.makeText(activity, "Jogo encerrado!", Toast.LENGTH_LONG).show()
-                enviarBtn.text = getText(R.string.fim_de_jogo)
                 mMainViewModel.jogoEncerrado()
             }
             if (mMainViewModel.round.value!! <= 9) {

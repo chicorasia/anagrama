@@ -31,7 +31,7 @@ class MainViewModel : ViewModel() {
     val navegaParaGameOver: LiveData<Boolean?>
         get() = _navegaParaGameOver
 
-//    TODO 001: adicionar uma variável palpite do tipo LiveData<String>
+//    TODO 001: adicionar uma variável palpite do tipo MutableLiveData<String> sem encapsulamento
 //    TODO 002: adicionar uma função enviaPalpite()
 
     val acerto = MutableLiveData<Boolean?>(null)
