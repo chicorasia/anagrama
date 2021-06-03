@@ -26,6 +26,14 @@ class MainViewModel : ViewModel() {
     val round: LiveData<Int>
         get() = _round
 
+//    Uma variável para disparar a navegação para a tela de Game Over
+    private val _navegaParaGameOver = MutableLiveData<Boolean?>()
+    val navegaParaGameOver: LiveData<Boolean?>
+        get() = _navegaParaGameOver
+
+//    TODO 001: adicionar uma variável palpite do tipo LiveData<String>
+//    TODO 002: adicionar uma função enviaPalpite()
+
     val acerto = MutableLiveData<Boolean?>(null)
 
     init {
@@ -75,9 +83,12 @@ class MainViewModel : ViewModel() {
         _round.value = round
     }
 
-    fun novoJogo() {
-        _round.value = 1
-        _score.value = 0
+    fun jogoEncerrado() {
+        _navegaParaGameOver.value = true
+    }
+
+    fun navegouParaGameOver(){
+        _navegaParaGameOver.value = null
     }
 
 

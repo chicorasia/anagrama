@@ -29,8 +29,6 @@ class MainFragment : Fragment() {
     private lateinit var palpiteInputEdt: EditText
     private lateinit var enviarBtn: MaterialButton
     private lateinit var resultadoTv: TextView
-    private lateinit var escoreTv: TextView
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,13 +38,12 @@ class MainFragment : Fragment() {
         mMainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         val view = binding.root
-        binding.mMainViewModel = mMainViewModel
+        binding.mainViewModel = mMainViewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
         palpiteInputEdt = view.findViewById(R.id.palpiteInputEdt)
         enviarBtn = view.findViewById(R.id.enviarBtn)
         resultadoTv = view.findViewById(R.id.resultadoTv)
-        escoreTv = view.findViewById(R.id.escoreTv)
 
         return view
     }
@@ -58,11 +55,12 @@ class MainFragment : Fragment() {
         mMainViewModel.criaSegredo()
 
 
+// TODO 003: Mover esses comportamentos para para função enviaPalpite() do ViewModel
         enviarBtn.setOnClickListener {
             if (mMainViewModel.round.value == 10) {
                 Toast.makeText(activity, "Jogo encerrado!", Toast.LENGTH_LONG).show()
                 enviarBtn.text = getText(R.string.fim_de_jogo)
-                jogoEncerrado()
+                mMainViewModel.jogoEncerrado()
             }
             if (mMainViewModel.round.value!! <= 9) {
                 val palpite = palpiteInputEdt.text.toString().toUpperCase()
@@ -73,8 +71,13 @@ class MainFragment : Fragment() {
 
         }
 
-        mMainViewModel.score.observe(viewLifecycleOwner) {
-            escoreTv.text = it.toString()
+        mMainViewModel.navegaParaGameOver.observe(viewLifecycleOwner) {
+            it?.let{
+                if (it == true){
+                    navegaParaGameOver()
+                }
+                mMainViewModel.navegouParaGameOver()
+            }
         }
 
         mMainViewModel.acerto.observe(viewLifecycleOwner, Observer<Boolean?> { ehAcerto ->
@@ -92,11 +95,10 @@ class MainFragment : Fragment() {
 
     }
 
-    private fun jogoEncerrado() {
-        val pontuacao : Int = mMainViewModel.score.value ?: 0
+    private fun navegaParaGameOver() {
+        val pontuacao: Int = mMainViewModel.score.value ?: 0
         val direcao = MainFragmentDirections.actionMainFragmentToGameOverFragment()
         direcao.pontuacaoFinal = pontuacao
-
         findNavController().navigate(direcao)
     }
 
