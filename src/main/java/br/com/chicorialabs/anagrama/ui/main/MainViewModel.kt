@@ -2,8 +2,8 @@ package br.com.chicorialabs.anagrama.ui.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import java.util.*
 import kotlin.random.Random
 import kotlin.random.nextInt
 
@@ -74,6 +74,11 @@ class MainViewModel : ViewModel() {
         } else {
             acerto.value = false
         }
+        limpaPalpite()
+    }
+
+    private fun limpaPalpite() {
+        palpite.value = ""
     }
 
     fun avancaRound(){

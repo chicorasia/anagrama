@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import br.com.chicorialabs.anagrama.R
+import br.com.chicorialabs.anagrama.databinding.GameOverFragmentBinding
 import com.google.android.material.button.MaterialButton
 
 class GameOverFragment : Fragment() {
@@ -18,9 +19,12 @@ class GameOverFragment : Fragment() {
         fun newInstance() = GameOverFragment()
     }
 
+    private val binding: GameOverFragmentBinding by lazy {
+        GameOverFragmentBinding.inflate(layoutInflater)
+    }
+
     private val argumentos by navArgs<GameOverFragmentArgs>()
     private lateinit var novoJogoBtn: MaterialButton
-    private lateinit var gameOverScore: TextView
     private lateinit var mGameOverViewModel: GameOverViewModel
 
 
@@ -28,13 +32,15 @@ class GameOverFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.game_over_fragment, container, false)
-
+//        Substituir a view inflada pelo binding.root
+        val view = binding.root
 
         novoJogoBtn = view.findViewById(R.id.novoJogoBtn)
-        gameOverScore = view.findViewById(R.id.gameOverScoreTv)
 
+//        Vincular o viewModel e o lifecycleowner do binding
         mGameOverViewModel = ViewModelProvider(this).get(GameOverViewModel::class.java)
+        binding.gameOverViewModel = mGameOverViewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
         return view
 
@@ -47,13 +53,9 @@ class GameOverFragment : Fragment() {
             findNavController().navigate(R.id.action_gameOverFragment_to_mainFragment)
         }
 
-
         val pontuacaoFinal = argumentos.pontuacaoFinal
         mGameOverViewModel.setScore(pontuacaoFinal)
 
-        mGameOverViewModel.score.observe(viewLifecycleOwner) {
-            gameOverScore.text = it.toString()
-        }
     }
 
 }

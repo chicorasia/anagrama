@@ -9,7 +9,6 @@
        <variable
            name="mainViewModel"
            type="br.com.chicorialabs.anagrama.ui.main.MainViewModel" />
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -100,12 +99,13 @@
             app:layout_constraintTop_toBottomOf="@+id/enviarBtn"
             tools:visibility="visible" />
 
+<!--        TODO 002: Vincular a string de formatação com o TextView-->
         <TextView
             android:id="@+id/escoreTv"
             style="?attr/textAppearanceBody1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{mainViewModel.score.toString()}"
+            android:text="@{String.valueOf(mainViewModel.score)}"
             app:layout_constraintBottom_toTopOf="@+id/guideline2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
