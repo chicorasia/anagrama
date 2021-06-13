@@ -7,5 +7,6 @@
     <string name="instrucao">Que fruta é essa?</string>
     <string name="fim_de_jogo">Fim de jogo!</string>
     <string name="jogar_novamente">jogar novamente</string>
-<!--    TODO 001: Criar as strings de formatação-->
+    <string name="score_format">Pontuação: %d ponto(s)</string>
+    <string name="game_over_score_format">Score final:\n%d ponto(s)</string>
 </resources>
