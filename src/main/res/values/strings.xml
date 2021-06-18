@@ -9,4 +9,5 @@
     <string name="jogar_novamente">jogar novamente</string>
     <string name="score_format">Pontuação: %d ponto(s)</string>
     <string name="game_over_score_format">Score final:\n%d ponto(s)</string>
+<!--    TODO 003: Usar interpolação para formatar a string de resposta-->
 </resources>

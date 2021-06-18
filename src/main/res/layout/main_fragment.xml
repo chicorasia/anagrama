@@ -9,6 +9,7 @@
        <variable
            name="mainViewModel"
            type="br.com.chicorialabs.anagrama.ui.main.MainViewModel" />
+<!--        TODO 007: importar a classe View-->
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -86,6 +87,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/palpite" />
 
+<!--        TODO 004: Duplicar esse TextView como respostaTv -->
+<!--        TODO 006: Usar um operador ternário para controlar a visibilidade dos TextViews-->
         <TextView
             android:id="@+id/resultadoTv"
             style="?attr/textAppearanceBody1"
@@ -99,6 +102,7 @@
             app:layout_constraintTop_toBottomOf="@+id/enviarBtn"
             tools:visibility="visible" />
 
+<!--        TODO 008: fazer o databinding com o mainViewModel.segredo-->
         <TextView
             android:id="@+id/escoreTv"
             style="?attr/textAppearanceBody1"

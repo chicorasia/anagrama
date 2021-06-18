@@ -44,7 +44,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView"
             app:layout_constraintVertical_bias="0.25"
             android:text="@{@string/game_over_score_format(gameOverViewModel.score)}"
-            tools:text="10" />
+            tools:text="@string/game_over_score_format" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/novoJogoBtn"

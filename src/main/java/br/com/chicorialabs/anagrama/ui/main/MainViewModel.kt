@@ -40,6 +40,8 @@ class MainViewModel : ViewModel() {
         _round.value = 1
     }
 
+// TODO 005: Criar duas variáveis no ViewModel usando Transformations
+
     fun criaSegredo() {
         val palavraSecreta = sorteiaPalavra(listaDePalavras)
         _segredo.value = palavraSecreta

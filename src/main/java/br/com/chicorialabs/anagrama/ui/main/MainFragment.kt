@@ -25,6 +25,7 @@ class MainFragment : Fragment() {
         MainFragmentBinding.inflate(layoutInflater)
     }
 
+//    TODO 009: Eliminar referência ao resultadoTv no MainFragment
     private lateinit var mMainViewModel: MainViewModel
     private lateinit var resultadoTv: TextView
 
@@ -52,13 +53,15 @@ class MainFragment : Fragment() {
 
         mMainViewModel.navegaParaGameOver.observe(viewLifecycleOwner) {
             it?.let{
-                if (it == true){
+                if (it){
                     navegaParaGameOver()
                 }
                 mMainViewModel.navegouParaGameOver()
             }
         }
 
+//        TODO 001: Extrair as strings
+//        TODO 002: Eliminar o observer
         mMainViewModel.acerto.observe(viewLifecycleOwner, Observer<Boolean?> { ehAcerto ->
             when (ehAcerto) {
                 true -> {
@@ -76,8 +79,7 @@ class MainFragment : Fragment() {
 
     private fun navegaParaGameOver() {
         val pontuacao: Int = mMainViewModel.score.value ?: 0
-        val direcao = MainFragmentDirections.actionMainFragmentToGameOverFragment()
-        direcao.pontuacaoFinal = pontuacao
+        val direcao = MainFragmentDirections.actionMainFragmentToGameOverFragment(pontuacao)
         findNavController().navigate(direcao)
     }
 
