@@ -40,7 +40,15 @@ class MainViewModel : ViewModel() {
         _round.value = 1
     }
 
-// TODO 005: Criar duas variáveis no ViewModel usando Transformations
+
+    val resultadoVisible = Transformations.map(acerto) { acerto ->
+        acerto == true
+    }
+
+    val respostaVisible = Transformations.map(acerto) { acerto ->
+        acerto == false
+    }
+
 
     fun criaSegredo() {
         val palavraSecreta = sorteiaPalavra(listaDePalavras)

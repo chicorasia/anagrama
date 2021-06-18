@@ -25,9 +25,7 @@ class MainFragment : Fragment() {
         MainFragmentBinding.inflate(layoutInflater)
     }
 
-//    TODO 009: Eliminar referência ao resultadoTv no MainFragment
     private lateinit var mMainViewModel: MainViewModel
-    private lateinit var resultadoTv: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,8 +37,6 @@ class MainFragment : Fragment() {
         val view = binding.root
         binding.mainViewModel = mMainViewModel
         binding.lifecycleOwner = viewLifecycleOwner
-
-        resultadoTv = view.findViewById(R.id.resultadoTv)
 
         return view
     }
@@ -60,20 +56,18 @@ class MainFragment : Fragment() {
             }
         }
 
-//        TODO 001: Extrair as strings
-//        TODO 002: Eliminar o observer
-        mMainViewModel.acerto.observe(viewLifecycleOwner, Observer<Boolean?> { ehAcerto ->
-            when (ehAcerto) {
-                true -> {
-                    mostraToast("Parabéns, você acertou!")
-                }
-                false -> {
-                    mostraToast("Lamento, você errou! A palavra era: ${mMainViewModel.segredo.value}")
-                }
-                null -> {
-                }
-            }
-        })
+//        mMainViewModel.acerto.observe(viewLifecycleOwner, Observer<Boolean?> { ehAcerto ->
+//            when (ehAcerto) {
+//                true -> {
+//                    mostraToast(getString(R.string.mensagem_acerto))
+//                }
+//                false -> {
+//                    mostraToast(getString(R.string.mensagem_erro))
+//                }
+//                null -> {
+//                }
+//            }
+//        })
 
     }
 

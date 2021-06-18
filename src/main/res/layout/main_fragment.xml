@@ -9,7 +9,7 @@
        <variable
            name="mainViewModel"
            type="br.com.chicorialabs.anagrama.ui.main.MainViewModel" />
-<!--        TODO 007: importar a classe View-->
+        <import type="android.view.View"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -87,22 +87,32 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/palpite" />
 
-<!--        TODO 004: Duplicar esse TextView como respostaTv -->
-<!--        TODO 006: Usar um operador ternário para controlar a visibilidade dos TextViews-->
         <TextView
             android:id="@+id/resultadoTv"
             style="?attr/textAppearanceBody1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/resultado_placeholder"
-            android:visibility="invisible"
+            android:text="@string/mensagem_acerto"
+            android:visibility="@{mainViewModel.resultadoVisible ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/enviarBtn"
             tools:visibility="visible" />
 
-<!--        TODO 008: fazer o databinding com o mainViewModel.segredo-->
+        <TextView
+            android:id="@+id/respostaTv"
+            style="?attr/textAppearanceBody1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/mensagem_erro(mainViewModel.segredo)}"
+            android:visibility="@{mainViewModel.respostaVisible ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/enviarBtn"
+            tools:visibility="visible" />
+
         <TextView
             android:id="@+id/escoreTv"
             style="?attr/textAppearanceBody1"
