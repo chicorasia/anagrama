@@ -33,7 +33,9 @@ class MainViewModel : ViewModel() {
 
     val palpite = MutableLiveData<String>()
 
-    val acerto = MutableLiveData<Boolean?>(null)
+    private val acerto = MutableLiveData<Boolean?>(null)
+
+    val segredoAnterior = MutableLiveData<String>("")
 
     init {
         _score.value = 0
@@ -84,6 +86,7 @@ class MainViewModel : ViewModel() {
         } else {
             acerto.value = false
         }
+        segredoAnterior.value = segredo.value
         limpaPalpite()
     }
 

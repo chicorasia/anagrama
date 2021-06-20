@@ -105,7 +105,7 @@
             style="?attr/textAppearanceBody1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{@string/mensagem_erro(mainViewModel.segredo)}"
+            android:text="@{@string/mensagem_erro(mainViewModel.segredoAnterior)}"
             android:visibility="@{mainViewModel.respostaVisible ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
