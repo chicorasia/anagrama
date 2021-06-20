@@ -15,6 +15,7 @@ import br.com.chicorialabs.anagrama.R
 import br.com.chicorialabs.anagrama.databinding.MainFragmentBinding
 import com.google.android.material.button.MaterialButton
 
+
 class MainFragment : Fragment() {
 
     companion object {
@@ -25,6 +26,7 @@ class MainFragment : Fragment() {
         MainFragmentBinding.inflate(layoutInflater)
     }
 
+//    TODO 006: Instanciar o ViewModel por meio de delegate
     private lateinit var mMainViewModel: MainViewModel
 
     override fun onCreateView(
@@ -56,29 +58,13 @@ class MainFragment : Fragment() {
             }
         }
 
-//        mMainViewModel.acerto.observe(viewLifecycleOwner, Observer<Boolean?> { ehAcerto ->
-//            when (ehAcerto) {
-//                true -> {
-//                    mostraToast(getString(R.string.mensagem_acerto))
-//                }
-//                false -> {
-//                    mostraToast(getString(R.string.mensagem_erro))
-//                }
-//                null -> {
-//                }
-//            }
-//        })
-
     }
 
+//    TODO 009: eliminar os argumentos da Directions
     private fun navegaParaGameOver() {
         val pontuacao: Int = mMainViewModel.score.value ?: 0
         val direcao = MainFragmentDirections.actionMainFragmentToGameOverFragment(pontuacao)
         findNavController().navigate(direcao)
-    }
-
-    fun mostraToast(mensagem: String) {
-        Toast.makeText(activity, mensagem, Toast.LENGTH_LONG).show()
     }
 
 }

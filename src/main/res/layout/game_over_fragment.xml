@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-<variable
-    name="gameOverViewModel"
-    type="br.com.chicorialabs.anagrama.ui.gameover.GameOverViewModel" />
+<!-- TODO 010: Adicionar o MainViewModel-->
+        <variable
+            name="gameOverViewModel"
+            type="br.com.chicorialabs.anagrama.ui.gameover.GameOverViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,19 +32,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
+<!--        TODO 011: modificar o binding para acessar a variável no MainViewModel-->
         <TextView
             android:id="@+id/gameOverScoreTv"
             style="?attr/textAppearanceHeadline2"
-            android:textAlignment="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="96dp"
+            android:text="@{@string/game_over_score_format(gameOverViewModel.score)}"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView"
             app:layout_constraintVertical_bias="0.25"
-            android:text="@{@string/game_over_score_format(gameOverViewModel.score)}"
             tools:text="@string/game_over_score_format" />
 
         <com.google.android.material.button.MaterialButton

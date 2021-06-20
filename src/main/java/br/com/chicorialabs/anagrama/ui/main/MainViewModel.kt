@@ -8,10 +8,11 @@ import kotlin.random.Random
 import kotlin.random.nextInt
 
 
+// TODO 002: colocar uma PalavrasDao como dependência do MainViewModel
 class MainViewModel : ViewModel() {
 
     private val _segredo = MutableLiveData<String>()
-    val segredo: LiveData<String>
+    private val segredo: LiveData<String>
         get() = _segredo
 
     private val _desafio = MutableLiveData<String>()
@@ -51,7 +52,7 @@ class MainViewModel : ViewModel() {
         acerto == false
     }
 
-
+// TODO 003: acessar a lista de palavras via Dao
     fun criaSegredo() {
         val palavraSecreta = sorteiaPalavra(listaDePalavras)
         _segredo.value = palavraSecreta
@@ -120,6 +121,7 @@ class MainViewModel : ViewModel() {
     }
 
 
+//    TODO 001: Extrair essa lista de palavras para uma classe PalavrasDao
     private val listaDePalavras: List<String> = arrayListOf(
         "Abacate",
         "Abacaxi",
