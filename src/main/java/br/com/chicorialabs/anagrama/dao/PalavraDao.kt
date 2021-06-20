@@ -4,7 +4,7 @@ import java.util.*
 
 class PalavraDao {
 
-    private val listaDePalavras: List<String> = arrayListOf(
+    private val _listaDePalavras: List<String> = arrayListOf(
         "Abacate",
         "Abacaxi",
         "Abiu",
@@ -149,5 +149,6 @@ class PalavraDao {
         "Zimbro"
     )
 
-    fun getLista(): List<String> = Collections.unmodifiableList(listaDePalavras)
+    val listaDePalavras: List<String> = Collections.unmodifiableList(_listaDePalavras)
+
 }

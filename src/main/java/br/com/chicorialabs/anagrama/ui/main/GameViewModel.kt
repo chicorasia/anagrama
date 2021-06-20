@@ -53,7 +53,7 @@ class GameViewModel(private val palavraDao: PalavraDao) : ViewModel() {
     }
 
     fun criaSegredo() {
-        val palavraSecreta = sorteiaPalavra(palavraDao.getLista())
+        val palavraSecreta = sorteiaPalavra(palavraDao.listaDePalavras)
         _segredo.value = palavraSecreta
         embaralhaPalavra(palavraSecreta)
     }
