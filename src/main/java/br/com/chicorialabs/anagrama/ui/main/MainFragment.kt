@@ -4,16 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import br.com.chicorialabs.anagrama.R
 import br.com.chicorialabs.anagrama.databinding.MainFragmentBinding
-import com.google.android.material.button.MaterialButton
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
 class MainFragment : Fragment() {
@@ -26,18 +20,15 @@ class MainFragment : Fragment() {
         MainFragmentBinding.inflate(layoutInflater)
     }
 
-//    TODO 006: Instanciar o ViewModel por meio de delegate
-    private lateinit var mMainViewModel: MainViewModel
+    private val mGameViewModel: GameViewModel by sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
-        mMainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-
         val view = binding.root
-        binding.mainViewModel = mMainViewModel
+        binding.gameViewModel = mGameViewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
         return view
@@ -46,24 +37,21 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        mGameViewModel.criaSegredo()
 
-        mMainViewModel.criaSegredo()
-
-        mMainViewModel.navegaParaGameOver.observe(viewLifecycleOwner) {
-            it?.let{
-                if (it){
+        mGameViewModel.navegaParaGameOver.observe(viewLifecycleOwner) {
+            it?.let {
+                if (it) {
                     navegaParaGameOver()
                 }
-                mMainViewModel.navegouParaGameOver()
+                mGameViewModel.navegouParaGameOver()
             }
         }
 
     }
 
-//    TODO 009: eliminar os argumentos da Directions
     private fun navegaParaGameOver() {
-        val pontuacao: Int = mMainViewModel.score.value ?: 0
-        val direcao = MainFragmentDirections.actionMainFragmentToGameOverFragment(pontuacao)
+        val direcao = MainFragmentDirections.actionMainFragmentToGameOverFragment()
         findNavController().navigate(direcao)
     }
 

@@ -7,8 +7,8 @@
 
     <data>
        <variable
-           name="mainViewModel"
-           type="br.com.chicorialabs.anagrama.ui.main.MainViewModel" />
+           name="gameViewModel"
+           type="br.com.chicorialabs.anagrama.ui.main.GameViewModel" />
         <import type="android.view.View"/>
     </data>
 
@@ -23,7 +23,7 @@
             style="?attr/textAppearanceHeadline4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{mainViewModel.desafio}"
+            android:text="@{gameViewModel.desafio}"
             app:layout_constraintBottom_toTopOf="@+id/guideline3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
@@ -69,7 +69,7 @@
                 android:id="@+id/palpiteInputEdt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@={mainViewModel.palpite}"
+                android:text="@={gameViewModel.palpite}"
                 android:hint="@string/digite_seu_palpite" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -81,7 +81,7 @@
             android:text="@string/enviar"
             android:textColor="@color/colorOnSecondary"
             app:backgroundTint="@color/secondaryColor"
-            android:onClick="@{() -> mainViewModel.enviarPalpite()}"
+            android:onClick="@{() -> gameViewModel.enviarPalpite()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -93,7 +93,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/mensagem_acerto"
-            android:visibility="@{mainViewModel.resultadoVisible ? View.VISIBLE : View.INVISIBLE}"
+            android:visibility="@{gameViewModel.resultadoVisible ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -105,8 +105,8 @@
             style="?attr/textAppearanceBody1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{@string/mensagem_erro(mainViewModel.segredoAnterior)}"
-            android:visibility="@{mainViewModel.respostaVisible ? View.VISIBLE : View.INVISIBLE}"
+            android:text="@{@string/mensagem_erro(gameViewModel.segredoAnterior)}"
+            android:visibility="@{gameViewModel.respostaVisible ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -118,7 +118,7 @@
             style="?attr/textAppearanceBody1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{@string/score_format(mainViewModel.score)}"
+            android:text="@{@string/score_format(gameViewModel.score)}"
             app:layout_constraintBottom_toTopOf="@+id/guideline2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
